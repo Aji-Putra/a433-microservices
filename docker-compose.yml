@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  item-app:
+    image: aj180npr/item-app:v1
+    ports:
+      - "80:8080" # Port mapping dari port 80 di host ke port 8080 di container
+    depends_on:
+      - item-db # Pastikan item-app hanya berjalan setelah item-db diluncurkan
+    restart: always # Restart policy: selalu
+
+  item-db:
+    image: mongo:3
+    volumes:
+      - app-db:/data/db
+    restart: always # Restart policy: selalu
+
+volumes:
+  app-db: # Membuat volume bernama app-db
